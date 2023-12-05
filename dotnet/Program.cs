@@ -17,11 +17,16 @@ var store = await obj.CreateObjectStore(obs_bucket);
 
 while (true)
 {
-    await store.PutAsync(
-        "/Users/jan.werner/Downloads/wochendaemmerung.opus",
-        File.OpenRead("/Users/jan.werner/Downloads/wochendaemmerung.opus")
-    );
+    try
+    {
+        await store.PutAsync(
+            "wochendaemmerung.opus",
+            File.OpenRead("/Users/jan.werner/Downloads/wochendaemmerung.opus")
+        );
+    }
+    catch (Exception ex)
+    {
+        // Custom error handling or logging
+        Console.WriteLine("An error occurred while calling PutAsync: " + ex.Message);
+    }
 }
-
-
-
